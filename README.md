@@ -17,5 +17,8 @@ cargo build --release
 sudo mv ./target/release/ipgen /usr/bin
 ```
 
+![ipgen](https://i.imgur.com/PnHF8Oy.png)
+
+
 
 
