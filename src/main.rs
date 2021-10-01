@@ -26,20 +26,23 @@ fn main() {
         cidr.pop();
     }
 
+
+
     let net: Ipv4Net = cidr.parse().unwrap();
+    let start_ip = net.network().to_string();
+    let end_ip = net.broadcast().to_string();
     let ip_iter = Ipv4AddrRange::new(
-        net.network().to_string().parse().unwrap(),
-        net.broadcast().to_string().parse().unwrap(),
+        start_ip.parse().unwrap(),
+        end_ip.parse().unwrap(),
     );
     println!("Total ip's in range: {}", ip_iter.count());
     // let mut count : i64 = 0;
+    println!("Start ip: {}, End ip: {}",start_ip, end_ip);
+    print!("Press enter to continue: ");
+    stdout().flush();
+    stdin().read_line(&mut "".to_string());
     ip_iter.for_each(|ip| {
         let add: std::net::IpAddr = ip.to_string().parse().unwrap();
-        match lookup_addr(&add) {
-            Ok(addr) => {
-                println!("Host: {}", addr);
-            }
-            Err(err) => return (),
-        };
+        println!("{}", add);
     });
 }
